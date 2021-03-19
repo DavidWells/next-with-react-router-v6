@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function SSROnly(props: any) {
+export default function SSGOnly(props: any) {
 	const data = props || {}
 	return (
 		<section>
-			<h1>Using file-system route and getServerSideProps</h1>
+			<h1>Using file-system route and getStaticProps</h1>
 			<pre>
 				<code>{JSON.stringify(data, null, 2)}</code>
 			</pre>
@@ -12,7 +12,7 @@ export default function SSROnly(props: any) {
 	)
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	return {
 		props: { fromServer: new Date().toTimeString() },
 	}

@@ -6,6 +6,12 @@ yarn-debug.log*
 yarn-error.log*
 out
 
+# Ignore auto generated next functions
+next_getserversideprops
+next_getstaticprops
+next_index
+next_image.js
+
 # Runtime data
 pids
 *.pid
@@ -107,3 +113,5 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+# Local Netlify folder
+.netlify
