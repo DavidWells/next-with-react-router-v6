@@ -11,6 +11,7 @@ next_getserversideprops
 next_getstaticprops
 next_index
 next_image.js
+next_api_*
 
 # Runtime data
 pids
