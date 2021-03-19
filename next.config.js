@@ -3,5 +3,13 @@ module.exports = {
   poweredByHeader: false,
   env: {
     SITE_NAME: 'foo',
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/:any*',
+        destination: '/',
+      },
+    ];
+  },
 }

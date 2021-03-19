@@ -32,6 +32,7 @@ export function createNextHistory(asPath: string): MemoryHistoryInstance {
 		},
 		createHref: historyMemory.createHref,
 		push(to, state) {
+			// alert(JSON.stringify(to))
 			const path = fromReactRouterToNextUrl(to)
 			historyMemory.push(to, state)
 			NextRouter.push(path, void 0, state as any)

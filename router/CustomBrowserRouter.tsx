@@ -24,7 +24,7 @@ function CustomBrowserRouter({ children, asPath }: React.PropsWithChildren<Custo
 			action: history.action,
 			location: history.location,
 		})
-
+		console.log('Use react-router-dom router')
 		return (
 			<Router action={state.action} location={state.location} navigator={history}>
 				{children}

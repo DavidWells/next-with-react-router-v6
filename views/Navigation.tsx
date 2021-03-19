@@ -2,7 +2,16 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import LinkNext from 'next/link'
 
-const routes = ['/', '/foo', '/foo/bar', '/get-server-side-props']
+const routes = [
+	'/', 
+	'/users', 
+	'/other', 
+	'/foo', 
+	'/foo/bar', 
+	'/get-server-side-props',
+	'/static-page', 
+	'/fake-page-to-404',
+]
 
 export default function Navigation() {
 	return (
