@@ -11,7 +11,7 @@ export default function SSROnly(props: any) {
 	)
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
 	return {
 		props: { fromServer: new Date().toTimeString() },
 	}
