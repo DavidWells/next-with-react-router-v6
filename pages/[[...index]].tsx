@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, Link } from 'react-router-dom'
+import { Route, Routes, Link, useParams } from 'react-router-dom'
 import dynamic from 'next/dynamic'
 import Other from '../views/Other'
 
@@ -25,7 +25,8 @@ export default function SPA() {
 	return (
 		<SafeHydrate>
 			<div>
-				<h1>SPA - Single SPA with StaticProps</h1>
+				<h1>Next.js SPA using React Router</h1>
+				<p>https://github.com/DavidWells/next-with-react-router</p>
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/users/*" element={<Users />} />
@@ -40,11 +41,7 @@ export default function SPA() {
 }
 
 function Users() {
-  /* All <Route path> and <Link to> values in this
-     component will automatically be "mounted" at the
-     /users URL prefix since the <Users> element is only
-     ever rendered when the URL matches /users/*
-  */
+	let { id } = useParams()
   return (
     <div>
       <nav>
@@ -53,7 +50,7 @@ function Users() {
 
       <Routes>
         <Route path="/" element={<div>User index</div>} />
-        <Route path=":id" element={<div>User profile</div>} />
+        <Route path=":id" element={<div>User profile "{id}"</div>} />
         <Route path="me" element={<div>User me</div>} />
       </Routes>
     </div>
