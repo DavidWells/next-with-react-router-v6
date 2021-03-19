@@ -5,3 +5,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# SPA rule. Always redirect any request to our index.html
+[[redirects]]
+  from    = "/*"
+  to      = "/index.html"
+  status  = 200

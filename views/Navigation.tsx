@@ -5,11 +5,13 @@ import LinkNext from 'next/link'
 const routes = [
 	'/', 
 	'/users', 
+	'/users/me', 
 	'/other', 
 	'/foo', 
 	'/foo/bar', 
+	'/get-static-props', 
 	'/get-server-side-props',
-	'/static-page', 
+	'/about',
 	'/fake-page-to-404',
 ]
 

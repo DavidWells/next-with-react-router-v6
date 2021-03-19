@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function StaticPage(props: any) {
+export default function AboutUs(props: any) {
 	return (
 		<section>
-			<h1>Static page here</h1>
+			<h1>About us static page</h1>
 			<div>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				Integer vitae mauris arcu, eu pretium nisi. Praesent fringilla ornare ullamcorper. 
