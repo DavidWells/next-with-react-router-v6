@@ -17,19 +17,27 @@ const routes = [
 
 export default function Navigation() {
 	return (
-		<section style={{ display: 'flex', flexDirection: 'column' }}>
-			<h2>Using React Router "Link" component</h2>
-			{routes.map(href => (
-				<Link key={href} to={href}>
-					{href}
-				</Link>
-			))}
-			<h2>Using NextJS "Link" component</h2>
-			{routes.map(href => (
-				<LinkNext key={href} href={href}>
-					{href}
-				</LinkNext>
-			))}
+		<section style={{ display: 'flex' }}>
+			<div style={{ marginRight: 70 }}>
+				<h2>Using React Router "Link" component</h2>
+				{routes.map(href => (
+					<div>
+						<Link key={href} to={href}>
+							{href}
+						</Link>
+					</div>
+				))}
+			</div>
+			<div>
+				<h2>Using NextJS "Link" component</h2>
+				{routes.map(href => (
+					<div>
+						<LinkNext key={href} href={href}>
+						{href}
+						</LinkNext>
+					</div>
+				))}
+			</div>
 		</section>
 	)
 }
