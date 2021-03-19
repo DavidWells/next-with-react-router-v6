@@ -6,7 +6,6 @@ import Navigation from '../views/Navigation'
 export default class CustomApp extends App<AppProps> {
 	render() {
 		const { Component, pageProps } = this.props
-
 		return (
 			<CustomBrowserRouter asPath={this.props.router.asPath}>
 				<Component {...pageProps} />
