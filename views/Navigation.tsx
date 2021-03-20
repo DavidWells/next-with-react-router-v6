@@ -20,7 +20,7 @@ const routes = [
 		type: 'react-router',
 	},
 	{ 
-		href: '/other',
+		href: '/client-only',
 		type: 'react-router',
 	},
 	{ 

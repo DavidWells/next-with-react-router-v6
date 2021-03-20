@@ -8,8 +8,7 @@ import ForkMe from '../components/ForkMe'
 const Foo = dynamic(() => import('../views/Foo'))
 const FooBar = dynamic(() => import('../views/FooBar'))
 const NotFound = dynamic(() => import('../views/NotFound'))
-const Other = dynamic(() => import('../views/Other'))
-
+const ClientOnly = dynamic(() => import('../views/ClientOnly'))
 /**
  * This page acts as a SPA
  * If `fallback: false`, then it can be exported with `next export`
@@ -26,7 +25,7 @@ export default function SPA() {
         <Route path="/users/*" element={<Users />} />
         <Route path="/foo" element={<Foo />} />
         <Route path="/foo/bar" element={<FooBar />} />
-        <Route path="/other" element={<Other />} />
+        <Route path="/client-only" element={<ClientOnly />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
@@ -93,7 +92,6 @@ export function getStaticProps() {
 export const getStaticPaths = async () => ({
 	paths: [
 		{ params: { index: [] } },
-		{ params: { index: ['other'] } },
 		{ params: { index: ['users'] } },
 		{ params: { index: ['foo'] } },
 		{ params: { index: ['foo', 'bar'] } },
