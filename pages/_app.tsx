@@ -3,6 +3,8 @@ import App, { AppProps } from 'next/app'
 import CustomBrowserRouter from '../router/CustomBrowserRouter'
 import Navigation from '../views/Navigation'
 
+console.log('ready')
+
 export default class CustomApp extends App<AppProps> {
 	render() {
 		const { Component, pageProps } = this.props
