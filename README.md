@@ -32,6 +32,7 @@ yarn build
 
 ## Alternative approaches
 
+- Using react router v5 https://github.com/DavidWells/next-with-react-router-v5
 - https://github.com/colinhacks/nextjs-react-router
 - https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
 - https://gist.github.com/tannerlinsley/65ac1f0175d79d19762cf06650707830
