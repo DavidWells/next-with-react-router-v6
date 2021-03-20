@@ -59,7 +59,7 @@ const routes = [
 
 export default function Navigation() {
 	return (
-		<section style={{ display: 'flex' }} className='flex'>
+		<div style={{ display: 'flex' }} className='flex'>
 			<div style={{ marginRight: 70 }}>
 				<h2>Using React Router &lt;Link&gt;</h2>
 				{routes.map(({ href, type }) => (
@@ -90,6 +90,6 @@ export default function Navigation() {
 					</div>
 				))}
 			</div>
-		</section>
+		</div>
 	)
 }
