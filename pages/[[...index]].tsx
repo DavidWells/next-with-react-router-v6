@@ -3,6 +3,7 @@ import { Route, Routes, Link, useParams, useMatch } from 'react-router-dom'
 import dynamic from 'next/dynamic'
 // include home component for instant loading
 import Home from '../views/Home'
+import ForkMe from '../components/ForkMe'
 // Async component loading
 const Foo = dynamic(() => import('../views/Foo'))
 const FooBar = dynamic(() => import('../views/FooBar'))
@@ -17,6 +18,7 @@ export default function SPA() {
 	return (
 		<SafeHydrate>
 			<div>
+        <ForkMe url="https://github.com/DavidWells/next-with-react-router-v6" />
 				<h1>Next.js SPA using React Router v6</h1>
 				<p>https://github.com/DavidWells/next-with-react-router-v6</p>
 				<Routes>
