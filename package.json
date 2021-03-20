@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-react-router",
+  "name": "nextjs-react-router-v6",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",

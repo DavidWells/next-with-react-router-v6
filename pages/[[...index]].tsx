@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, Link, useParams } from 'react-router-dom'
+import { Route, Routes, Link, useParams, useMatch } from 'react-router-dom'
 import dynamic from 'next/dynamic'
 import Other from '../views/Other'
 
@@ -25,8 +25,8 @@ export default function SPA() {
 	return (
 		<SafeHydrate>
 			<div>
-				<h1>Next.js SPA using React Router</h1>
-				<p>https://github.com/DavidWells/next-with-react-router</p>
+				<h1>Next.js SPA using React Router v6</h1>
+				<p>https://github.com/DavidWells/next-with-react-router-v6</p>
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/users/*" element={<Users />} />
@@ -41,21 +41,37 @@ export default function SPA() {
 }
 
 function Users() {
-	let { id } = useParams()
   return (
     <div>
       <nav>
         <Link to="me">My Profile</Link>
       </nav>
-
       <Routes>
-        <Route path="/" element={<div>User index</div>} />
-        <Route path=":id" element={<div>User profile "{id}"</div>} />
-        <Route path="me" element={<div>User me</div>} />
+        <Route path="/" element={<UserHome />} />
+				<Route path="me" element={<div>User me</div>} />
+        <Route path=":userId" element={<UserProfile />} />
       </Routes>
     </div>
-  );
+  )
 }
+
+function UserHome() {
+  return (
+		<div>
+			User index
+		</div>
+  )
+}
+
+function UserProfile() {
+	const params = useParams()
+  return (
+		<div>
+			User profile "{params.userId}"
+		</div>
+  )
+}
+
 
 export function getStaticProps() {
 	return {
