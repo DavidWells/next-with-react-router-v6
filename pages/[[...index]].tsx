@@ -15,25 +15,36 @@ const Other = dynamic(() => import('../views/Other'))
  * If `fallback: false`, then it can be exported with `next export`
  */
 export default function SPA() {
-	return (
-			<div>
-        <ForkMe url="https://github.com/DavidWells/next-with-react-router-v6" />
-				<h1>Next.js SPA using React Router v6</h1>
-				<p>https://github.com/DavidWells/next-with-react-router-v6</p>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/users/*" element={<Users />} />
-					<Route path="/foo" element={<Foo />} />
-					<Route path="/foo/bar" element={<FooBar />} />
-					<Route path="/other" element={<Other />} />
-					<Route path="*" element={<NotFound />} />
-				</Routes>
-			</div>
-	)
+
+  const app = (
+    <>
+      <ForkMe url="https://github.com/DavidWells/next-with-react-router-v6" />
+      <h1>Next.js SPA using React Router v6</h1>
+      <p>https://github.com/DavidWells/next-with-react-router-v6</p>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/users/*" element={<Users />} />
+        <Route path="/foo" element={<Foo />} />
+        <Route path="/foo/bar" element={<FooBar />} />
+        <Route path="/other" element={<Other />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  )
+
+  // Fix "Expected server HTML to contain a matching <div> in <div>." warning in dev mode
+  if (process.env.NODE_ENV === 'development') {
+    return (
+      <SafeHydrate>
+        {app}
+      </SafeHydrate>
+    )
+  }
+
+  return app
 }
 
 function SafeHydrate({ children }) {
-	// Must be a div, can't be a fragment 😑🤦‍♂️
   return (
     <div suppressHydrationWarning>
       {typeof document === 'undefined' ? null : children}
