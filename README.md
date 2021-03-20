@@ -1,4 +1,11 @@
 # Next with react router v6 static export
+<h1> Next.js with react router v6 static export
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/DavidWells/next-with-react-router-v6">
+  <img align="right" src="https://camo.githubusercontent.com/be2eb66bb727e25655f1dcff88c2fdca82a77513/68747470733a2f2f7777772e6e65746c6966792e636f6d2f696d672f6465706c6f792f627574746f6e2e737667" 
+  class="deploy-button" 
+  alt="deploy to netlify">
+</a>
+</h1>
 
 Exports static routes for app and uses react router v6 for client side routing.
 
