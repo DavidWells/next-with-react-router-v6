@@ -3,6 +3,7 @@ import { Route, Routes, Link, useParams, useMatch } from 'react-router-dom'
 import dynamic from 'next/dynamic'
 // include home component for instant loading
 import Home from '../views/Home'
+import LoadingView from '../views/Loading'
 import ForkMe from '../components/ForkMe'
 // Async component loading
 const Loading = () => <div>Loading...</div>
@@ -23,6 +24,7 @@ export default function SPA() {
       <p>https://github.com/DavidWells/next-with-react-router-v6</p>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/loading" element={<LoadingView />} />
         <Route path="/users/*" element={<Users />} />
         <Route path="/foo" element={<Foo />} />
         <Route path="/foo/bar" element={<FooBar />} />
@@ -93,6 +95,7 @@ export function getStaticProps() {
 export const getStaticPaths = async () => ({
 	paths: [
 		{ params: { index: [] } },
+    { params: { index: ['loading'] } },
 		{ params: { index: ['users'] } },
 		{ params: { index: ['foo'] } },
 		{ params: { index: ['foo', 'bar'] } },
