@@ -5,16 +5,17 @@ import dynamic from 'next/dynamic'
 import Home from '../views/Home'
 import ForkMe from '../components/ForkMe'
 // Async component loading
-const Foo = dynamic(() => import('../views/Foo'))
-const FooBar = dynamic(() => import('../views/FooBar'))
-const NotFound = dynamic(() => import('../views/NotFound'))
-const ClientOnly = dynamic(() => import('../views/ClientOnly'))
+const Loading = () => <div>Loading...</div>
+const dynamicOptions = { loading: () => <Loading /> }
+const Foo = dynamic(() => import('../views/Foo'), dynamicOptions)
+const FooBar = dynamic(() => import('../views/FooBar'), dynamicOptions)
+const NotFound = dynamic(() => import('../views/NotFound'), dynamicOptions)
+const ClientOnly = dynamic(() => import('../views/ClientOnly'), dynamicOptions)
 /**
  * This page acts as a SPA
  * If `fallback: false`, then it can be exported with `next export`
  */
 export default function SPA() {
-
   const app = (
     <>
       <ForkMe url="https://github.com/DavidWells/next-with-react-router-v6" />
