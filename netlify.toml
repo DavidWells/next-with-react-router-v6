@@ -9,5 +9,5 @@
 # SPA rule. Always redirect any request to our index.html
 [[redirects]]
   from    = "/*"
-  to      = "/index.html"
+  to      = "/loading.html"
   status  = 200
