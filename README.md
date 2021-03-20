@@ -8,7 +8,7 @@
 
 Exports static routes for app and uses react router v6 for client side routing.
 
-Via [this gist](https://gist.github.com/tannerlinsley/65ac1f0175d79d19762cf06650707830#gistcomment-3500046)
+Inspired by [this gist](https://gist.github.com/tannerlinsley/65ac1f0175d79d19762cf06650707830#gistcomment-3500046). Props to [eddyw](https://github.com/eddyw) and [tannerlinsley](https://github.com/tannerlinsley) for the idea & code ❤️
 
 ## How to use
 
