@@ -14,6 +14,8 @@ export default function SSGOnly(props: any) {
 
 export async function getStaticProps() {
 	return {
-		props: { fromServer: new Date().toTimeString() },
+		props: { 
+			fromBuildTime: new Date().toTimeString() 
+		},
 	}
 }
