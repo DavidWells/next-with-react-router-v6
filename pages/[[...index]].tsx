@@ -3,11 +3,15 @@ import { Route, Routes, Link, useParams, useMatch } from 'react-router-dom'
 import dynamic from 'next/dynamic'
 // include home component for instant loading
 import Home from '../views/Home'
-import LoadingView from '../views/Loading'
 import ForkMe from '../components/ForkMe'
+
 // Async component loading
-const Loading = () => <div>Loading...</div>
-const dynamicOptions = { loading: () => <Loading /> }
+function Loading(props: any) {
+	return <div>Loading page.... 😃</div>
+}
+const dynamicOptions = {
+  loading: () => <Loading /> 
+}
 const Foo = dynamic(() => import('../views/Foo'), dynamicOptions)
 const FooBar = dynamic(() => import('../views/FooBar'), dynamicOptions)
 const NotFound = dynamic(() => import('../views/NotFound'), dynamicOptions)
@@ -24,7 +28,7 @@ export default function SPA() {
       <p>https://github.com/DavidWells/next-with-react-router-v6</p>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/loading" element={<LoadingView />} />
+        <Route path="/loading" element={<Loading />} />
         <Route path="/users/*" element={<Users />} />
         <Route path="/foo" element={<Foo />} />
         <Route path="/foo/bar" element={<FooBar />} />
@@ -92,9 +96,11 @@ export function getStaticProps() {
 	}
 }
 
+/* Define the routes you want to statically render during next build here */
 export const getStaticPaths = async () => ({
 	paths: [
 		{ params: { index: [] } },
+    // Default loading view set in netlify.toml
     { params: { index: ['loading'] } },
 		{ params: { index: ['users'] } },
 		{ params: { index: ['foo'] } },
