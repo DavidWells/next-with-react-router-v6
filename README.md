@@ -12,12 +12,26 @@ Via [this gist](https://gist.github.com/tannerlinsley/65ac1f0175d79d19762cf06650
 
 ## How to use
 
+**Install deps**
+
 ```
 yarn
+```
+
+**Run locally**
+
+```
 yarn dev
+```
+
+**Build**
+
+```
 yarn build
 ```
 
 ## Alternative approaches
 
 - https://github.com/colinhacks/nextjs-react-router
+- https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
+- https://gist.github.com/tannerlinsley/65ac1f0175d79d19762cf06650707830#gistcomment-3500046
