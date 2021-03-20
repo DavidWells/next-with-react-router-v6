@@ -16,6 +16,7 @@ const Foo = dynamic(() => import('../views/Foo'), dynamicOptions)
 const FooBar = dynamic(() => import('../views/FooBar'), dynamicOptions)
 const NotFound = dynamic(() => import('../views/NotFound'), dynamicOptions)
 const ClientOnly = dynamic(() => import('../views/ClientOnly'), dynamicOptions)
+
 /**
  * This page acts as a SPA
  * If `fallback: false`, then it can be exported with `next export`
@@ -62,11 +63,12 @@ function Users() {
   return (
     <div>
       <nav>
-        <Link to="me">My Profile</Link>
+        <Link to="/users">User home</Link>&nbsp;
+        <Link to="me">My Profile</Link>&nbsp;
       </nav>
       <Routes>
         <Route path="/" element={<UserHome />} />
-				<Route path="me" element={<div>User me page</div>} />
+				<Route path="me" element={<UserMe />} />
         <Route path=":userId" element={<UserProfile />} />
       </Routes>
     </div>
@@ -77,6 +79,14 @@ function UserHome() {
   return (
 		<div>
 			User index page
+		</div>
+  )
+}
+
+function UserMe() {
+  return (
+		<div>
+			User me page. <Link to="/users/123456">Link to user/123456</Link>
 		</div>
   )
 }
