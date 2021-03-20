@@ -16,7 +16,6 @@ const Other = dynamic(() => import('../views/Other'))
  */
 export default function SPA() {
 	return (
-		<SafeHydrate>
 			<div>
         <ForkMe url="https://github.com/DavidWells/next-with-react-router-v6" />
 				<h1>Next.js SPA using React Router v6</h1>
@@ -30,7 +29,6 @@ export default function SPA() {
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>
-		</SafeHydrate>
 	)
 }
 
