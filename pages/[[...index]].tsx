@@ -1,13 +1,14 @@
 import React from 'react'
 import { Route, Routes, Link, Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
 import dynamic from 'next/dynamic'
+import { checkAuth } from '../utils/auth'
 // include home component for instant loading
 import Home from '../views/Home'
 import ForkMe from '../components/ForkMe'
 
-import Posts from '../views/Posts'
-import Post from '../views/Post'
-import PostLists from '../views/PostsList'
+/* Higher order component private routes */
+import PrivateWithAuth from '../views/PrivateWithAuth'
+import PrivateWithAuthClass from '../views/PrivateWithClassHoc'
 
 // Async component loading
 function Loading(props: any) {
@@ -20,6 +21,10 @@ const Foo = dynamic(() => import('../views/Foo'), dynamicOptions)
 const FooBar = dynamic(() => import('../views/FooBar'), dynamicOptions)
 const NotFound = dynamic(() => import('../views/NotFound'), dynamicOptions)
 const ClientOnly = dynamic(() => import('../views/ClientOnly'), dynamicOptions)
+
+const Posts = dynamic(() => import('../views/Posts'), dynamicOptions)
+const Post = dynamic(() => import('../views/Post'), dynamicOptions)
+const PostLists = dynamic(() => import('../components/PostList'), dynamicOptions)
 
 const Public = () => <div><h1>Public</h1></div>
 const Private = () => <div><h1>private</h1></div>
@@ -34,7 +39,7 @@ const PrivateContents = () => {
 
 const Login = (props) => {
   const location = useLocation()
-  console.log('useLocation', location)
+  console.log('useLocation', location) // <-- doesnt contain state from <Navigate>
   console.log('history?.state?.options?.pathname', history?.state?.options?.pathname)
   function handleLogin() {
     localStorage.setItem('authed', 'true')
@@ -52,20 +57,20 @@ const Login = (props) => {
 function PrivateOutlet() {
   const location = useLocation()
   console.log('location.pathname', location.pathname)
-  const auth = useAuth();
+  const auth = useAuth()
   return auth ? <Outlet /> : <Navigate to="/login" state={{ pathname: location.pathname }} replace />;
 }
 
 function PrivateRoute({ children }) {
   const location = useLocation()
-    console.log('location.pathname', location.pathname)
+  console.log('location.pathname', location.pathname)
 
-  const auth = useAuth();
+  const auth = useAuth()
   return auth ? children : <Navigate to="/login" state={{ pathname: location.pathname }} replace />;
 }
 
 function useAuth() {
-  return Boolean(localStorage.getItem('authed'))
+  return checkAuth()
 }
 
 /**
@@ -76,8 +81,11 @@ export default function SPA() {
   const app = (
     <>
       <ForkMe url="https://github.com/DavidWells/next-with-react-router-v6" />
-      <h1>Next.js SPA using React Router v6</h1>
-      <p>https://github.com/DavidWells/next-with-react-router-v6</p>
+      <h1>
+        <a href='https://github.com/DavidWells/next-with-react-router-v6' target='_blank'>
+          Next.js SPA using React Router v6
+        </a>
+      </h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/public" element={<Public />} />
@@ -92,6 +100,9 @@ export default function SPA() {
             </PrivateRoute>
           }
         />
+        <Route path="/private-with-auth" element={<PrivateWithAuth />} />
+        <Route path="/private-with-auth-class" element={<PrivateWithAuthClass />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/loading" element={<Loading />} />
         <Route path="/users/*" element={<Users />} />
@@ -99,9 +110,9 @@ export default function SPA() {
         <Route path="/foo/bar" element={<FooBar />} />
         <Route path="/client-only" element={<ClientOnly />} />
         {/* Dynamic slugs example */}
-        <Route path="posts" element={<Posts />}>
-          <Route path="/" element={<PostLists />} />
-          <Route path=":slug" element={<Post />} />
+        <Route path="/posts" element={<Posts />}>
+          <Route path="/posts" element={<PostLists />} />
+          <Route path="/posts/:slug" element={<Post />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

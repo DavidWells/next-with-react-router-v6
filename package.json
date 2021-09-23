@@ -16,8 +16,8 @@
     "next": "^11.1.2",
     "react": "latest",
     "react-dom": "latest",
-    "react-router": "6.0.0-beta.0",
-    "react-router-dom": "6.0.0-beta.0",
+    "react-router": "6.0.0-beta.4",
+    "react-router-dom": "6.0.0-beta.4",
     "typescript": "4.4.3"
   },
   "license": "ISC",

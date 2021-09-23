@@ -1,6 +1,6 @@
 import App, { AppProps } from 'next/app'
 import CustomBrowserRouter from '../router/CustomBrowserRouter'
-import Navigation from '../views/Navigation'
+import Navigation from '../components/Navigation'
 import onRouteChange from '@analytics/router-utils'
 
 onRouteChange((newRoutePath) => {

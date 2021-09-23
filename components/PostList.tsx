@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { BlogPosts } from './Posts'
+import { BlogPosts } from '../views/Posts'
 
 export default function PostLists() {
   return (
@@ -13,5 +13,5 @@ export default function PostLists() {
         </li>
       ))}
     </ul>
-  );
+  )
 }

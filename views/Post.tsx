@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 import { BlogPosts } from './Posts'
 
 export default function Post() {
-  const { slug } = useParams();
-  console.log('slug', slug)
+  const { slug } = useParams()
+  // @ts-ignore
   const post = BlogPosts[slug];
 
   const { title, description } = post;
@@ -14,5 +14,5 @@ export default function Post() {
       <h3>{title}</h3>
       <p>{description}</p>
     </div>
-  );
+  )
 }

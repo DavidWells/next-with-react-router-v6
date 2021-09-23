@@ -88,6 +88,8 @@ function PostLinks() {
 			<Link to="/posts">Posts</Link>
 				{" | "}
 			<Link to="/posts/1">post one</Link>
+				{" | "}
+			<Link to="/private-hoc">private hoc</Link>
 		</>
 	)
 }
@@ -95,7 +97,8 @@ function PostLinks() {
 export default function Navigation() {
 	return (
 		<div>
-			<PostLinks />
+      <h1>Link Tests</h1>
+      <PostLinks />
 			<div style={{ display: 'flex' }} className='flex'>
 				<div style={{ marginRight: 70 }}>
 					<h2>Using React Router &lt;Link&gt;</h2>
@@ -129,6 +132,5 @@ export default function Navigation() {
 				</div>
 			</div>
 		</div>
-
 	)
 }
