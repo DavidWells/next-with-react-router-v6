@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as React from 'react'
+import React from 'react'
 import { Router } from 'react-router-dom'
 import { StaticRouter } from 'react-router-dom/server'
 import { createNextHistory } from './createNextHistory'

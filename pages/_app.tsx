@@ -1,4 +1,3 @@
-import * as React from 'react'
 import App, { AppProps } from 'next/app'
 import CustomBrowserRouter from '../router/CustomBrowserRouter'
 import Navigation from '../views/Navigation'
