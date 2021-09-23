@@ -62,6 +62,11 @@ export default function Navigation() {
 		<div style={{ display: 'flex' }} className='flex'>
 			<div style={{ marginRight: 70 }}>
 				<h2>Using React Router &lt;Link&gt;</h2>
+				<Link to="/">Public</Link>
+					{" | "}
+				<Link to="/private-nested">Private Using Nested</Link>
+					{" | "}
+				<Link to="/private-outlet">Private Using Outlet</Link>
 				{routes.map(({ href, type }) => (
 					<div key={href}>
 						<Link to={href}>

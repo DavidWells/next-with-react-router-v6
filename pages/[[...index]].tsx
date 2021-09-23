@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, Link, useParams, useMatch } from 'react-router-dom'
+import { Route, Routes, Link, useParams, Navigate, Outlet } from 'react-router-dom'
 import dynamic from 'next/dynamic'
 // include home component for instant loading
 import Home from '../views/Home'
@@ -17,6 +17,26 @@ const FooBar = dynamic(() => import('../views/FooBar'), dynamicOptions)
 const NotFound = dynamic(() => import('../views/NotFound'), dynamicOptions)
 const ClientOnly = dynamic(() => import('../views/ClientOnly'), dynamicOptions)
 
+const Public = () => <div>public</div>;
+const Private = () => <div>private</div>;
+const PrivateContents = () => <div>private PrivateContents</div>;
+
+const Login = () => <div>login</div>;
+
+function PrivateOutlet() {
+  const auth = useAuth();
+  return auth ? <Outlet /> : <Navigate to="/login" />;
+}
+
+function PrivateRoute({ children }) {
+  const auth = useAuth();
+  return auth ? children : <Navigate to="/login" />;
+}
+
+function useAuth() {
+  return true;
+}
+
 /**
  * This page acts as a SPA
  * If `fallback: false`, then it can be exported with `next export`
@@ -29,6 +49,18 @@ export default function SPA() {
       <p>https://github.com/DavidWells/next-with-react-router-v6</p>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/private-outlet" element={<PrivateOutlet />}>
+          <Route element={<PrivateContents />} />
+        </Route>
+        <Route
+          path="/private-nested"
+          element={
+            <PrivateRoute>
+              <Private />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
         <Route path="/loading" element={<Loading />} />
         <Route path="/users/*" element={<Users />} />
         <Route path="/foo" element={<Foo />} />
