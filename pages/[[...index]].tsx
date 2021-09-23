@@ -1,9 +1,13 @@
 import React from 'react'
-import { Route, Routes, Link, useParams, Navigate, Outlet } from 'react-router-dom'
+import { Route, Routes, Link, Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
 import dynamic from 'next/dynamic'
 // include home component for instant loading
 import Home from '../views/Home'
 import ForkMe from '../components/ForkMe'
+
+import Posts from '../views/Posts'
+import Post from '../views/Post'
+import PostLists from '../views/PostsList'
 
 // Async component loading
 function Loading(props: any) {
@@ -17,24 +21,51 @@ const FooBar = dynamic(() => import('../views/FooBar'), dynamicOptions)
 const NotFound = dynamic(() => import('../views/NotFound'), dynamicOptions)
 const ClientOnly = dynamic(() => import('../views/ClientOnly'), dynamicOptions)
 
-const Public = () => <div>public</div>;
-const Private = () => <div>private</div>;
-const PrivateContents = () => <div>private PrivateContents</div>;
+const Public = () => <div><h1>Public</h1></div>
+const Private = () => <div><h1>private</h1></div>
+const PrivateContents = () => {
+  return (
+    <div>
+      <h1>PrivateContents</h1>
+      <Link to='/login' state={{ more: 'stuff' }}>Go to login</Link>
+    </div>
+  )
+}
 
-const Login = () => <div>login</div>;
+const Login = (props) => {
+  const location = useLocation()
+  console.log('useLocation', location)
+  console.log('history?.state?.options?.pathname', history?.state?.options?.pathname)
+  function handleLogin() {
+    localStorage.setItem('authed', 'true')
+    console.log('useLocation', location)
+    console.log('redirect to', history?.state?.options?.pathname)
+  }
+  return (
+    <div>
+      <h1>Please login</h1>
+      <button onClick={handleLogin}>Login</button>
+    </div>
+  )
+}
 
 function PrivateOutlet() {
+  const location = useLocation()
+  console.log('location.pathname', location.pathname)
   const auth = useAuth();
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  return auth ? <Outlet /> : <Navigate to="/login" state={{ pathname: location.pathname }} replace />;
 }
 
 function PrivateRoute({ children }) {
+  const location = useLocation()
+    console.log('location.pathname', location.pathname)
+
   const auth = useAuth();
-  return auth ? children : <Navigate to="/login" />;
+  return auth ? children : <Navigate to="/login" state={{ pathname: location.pathname }} replace />;
 }
 
 function useAuth() {
-  return true;
+  return Boolean(localStorage.getItem('authed'))
 }
 
 /**
@@ -49,6 +80,7 @@ export default function SPA() {
       <p>https://github.com/DavidWells/next-with-react-router-v6</p>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/public" element={<Public />} />
         <Route path="/private-outlet" element={<PrivateOutlet />}>
           <Route element={<PrivateContents />} />
         </Route>
@@ -66,6 +98,11 @@ export default function SPA() {
         <Route path="/foo" element={<Foo />} />
         <Route path="/foo/bar" element={<FooBar />} />
         <Route path="/client-only" element={<ClientOnly />} />
+        {/* Dynamic slugs example */}
+        <Route path="posts" element={<Posts />}>
+          <Route path="/" element={<PostLists />} />
+          <Route path=":slug" element={<Post />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
