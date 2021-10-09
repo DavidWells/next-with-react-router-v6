@@ -5,6 +5,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 out
+misc.md
 
 # Ignore auto generated next functions
 next_getserversideprops

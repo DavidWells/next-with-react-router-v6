@@ -19,6 +19,16 @@ const routes = [
 		href: '/private-outlet',
 		type: 'react-router',
 	},
+  {
+    title: 'Private Functional HOC',
+		href: '/private-with-auth',
+		type: 'react-router',
+	},
+  {
+    title: 'Private Class HOC',
+		href: '/private-with-auth-class',
+		type: 'react-router',
+	},
 	{ 
 		href: '/users',
 		type: 'react-router',
@@ -89,7 +99,7 @@ function PostLinks() {
 				{" | "}
 			<Link to="/posts/1">post one</Link>
 				{" | "}
-			<Link to="/private-hoc">private hoc</Link>
+			<Link to="/posts/2">post two</Link>
 		</>
 	)
 }
@@ -97,39 +107,48 @@ function PostLinks() {
 export default function Navigation() {
 	return (
 		<div>
-      <h1>Link Tests</h1>
-      <PostLinks />
-			<div style={{ display: 'flex' }} className='flex'>
-				<div style={{ marginRight: 70 }}>
-					<h2>Using React Router &lt;Link&gt;</h2>
-					{routes.map(({ href, type }) => (
-						<div key={href}>
-							<Link to={href}>
-								<span>{href} - ({type}) - <i>&lt;Link&gt;</i></span>
-							</Link>
-						</div>
-					))}
-				</div>
-				<div style={{ marginRight: 70 }}>
-					<h2>Using NextJS &lt;NextLink&gt;</h2>
-					{routes.map(({ href, type }) => (
-						<div key={href}>
-							<NextLink href={href}>
-								<a>{href} - ({type}) - <i>&lt;NextLink&gt;</i></a>
-							</NextLink>
-						</div>
-					))}
-				</div>
-				<div>
-					<h2>Using Normal &lt;a&gt; tag</h2>
-					{routes.map(({ href, type }) => (
-						<div key={href}>
-							<a href={href}>
-								{href} - ({type}) - <i>&lt;a&gt;</i>
-							</a>
-						</div>
-					))}
-				</div>
+
+			<div style={{ 
+        position: 'fixed',
+        bottom: 0,
+        paddingBottom: 20,
+        background: 'white',
+        borderTop: '2px solid black'
+      }}>
+        <h1>Link Tests</h1>
+        <PostLinks />
+        <div style={{ display: 'flex' }}>
+          <div style={{ marginRight: 70 }}>
+            <h2>Using React Router &lt;Link&gt;</h2>
+            {routes.map(({ href, title = '', type }) => (
+              <div key={href} title={`Using <Link> component`}>
+                <Link to={href}>
+                  <span>{href} {title} - ({type})</span>
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginRight: 70 }}>
+            <h2>Using NextJS &lt;NextLink&gt;</h2>
+            {routes.map(({ href, type }) => (
+              <div key={href} title={`Using <NextLink> component`}>
+                <NextLink href={href}>
+                  <a>{href} - ({type})</a>
+                </NextLink>
+              </div>
+            ))}
+          </div>
+          <div>
+            <h2>Using Normal &lt;a&gt; tag</h2>
+            {routes.map(({ href, type }) => (
+              <div key={href} title={`Using <a> tag`}>
+                <a href={href}>
+                  {href} - ({type})
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
 			</div>
 		</div>
 	)

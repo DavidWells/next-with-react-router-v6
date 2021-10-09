@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes, Link, Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
 import dynamic from 'next/dynamic'
-import { checkAuth } from '../utils/auth'
+import { checkAuth, useAuth } from '../utils/auth'
 // include home component for instant loading
 import Home from '../views/Home'
 import ForkMe from '../components/ForkMe'
@@ -38,14 +38,20 @@ const PrivateContents = () => {
 }
 
 const Login = (props) => {
+  const { auth, login } = useAuth();
   const location = useLocation()
   console.log('useLocation', location) // <-- doesnt contain state from <Navigate>
   console.log('history?.state?.options?.pathname', history?.state?.options?.pathname)
   function handleLogin() {
-    localStorage.setItem('authed', 'true')
+    login()
     console.log('useLocation', location)
     console.log('redirect to', history?.state?.options?.pathname)
   }
+
+  if (auth) {
+    return <Navigate to="/" replace />
+  }
+
   return (
     <div>
       <h1>Please login</h1>
@@ -57,20 +63,16 @@ const Login = (props) => {
 function PrivateOutlet() {
   const location = useLocation()
   console.log('location.pathname', location.pathname)
-  const auth = useAuth()
-  return auth ? <Outlet /> : <Navigate to="/login" state={{ pathname: location.pathname }} replace />;
+  const auth = checkAuth()
+  return auth ? <Outlet /> : <Navigate to="/login" state={{ pathname: location.pathname }} replace />
 }
 
 function PrivateRoute({ children }) {
   const location = useLocation()
   console.log('location.pathname', location.pathname)
 
-  const auth = useAuth()
-  return auth ? children : <Navigate to="/login" state={{ pathname: location.pathname }} replace />;
-}
-
-function useAuth() {
-  return checkAuth()
+  const auth = checkAuth()
+  return auth ? children : <Navigate to="/login" state={{ pathname: location.pathname }} replace />
 }
 
 /**
@@ -78,14 +80,39 @@ function useAuth() {
  * If `fallback: false`, then it can be exported with `next export`
  */
 export default function SPA() {
+  const { isLoading, auth, logout } = useAuth();
+  console.log('isLoading', isLoading)
+  console.log('auth', auth)
+
+  if (isLoading) {
+    return <div>Loading</div>
+  }
+
   const app = (
     <>
       <ForkMe url="https://github.com/DavidWells/next-with-react-router-v6" />
-      <h1>
-        <a href='https://github.com/DavidWells/next-with-react-router-v6' target='_blank'>
+      <div id="header"> 
+        <Link to='/'>
+          Home
+        </Link>
+        {'  '}
+        <Link to='/public'>
+          Public
+        </Link>
+        {'  '}
+        <Link to='/private-nested'>
+          Private
+        </Link>
+        {'  '}
+        <Link to='/doesnt-exist'>
+          404
+        </Link>
+        {'  '}
+        {auth && <button onClick={logout}>Logout</button>}
+        <h3>
           Next.js SPA using React Router v6
-        </a>
-      </h1>
+        </h3>
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/public" element={<Public />} />
